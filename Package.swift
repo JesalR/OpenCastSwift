@@ -12,16 +12,16 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-protobuf.git", .upToNextMajor(from: "1.7.0")),
-        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", .upToNextMajor(from: "5.0.0"))
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", .upToNextMajor(from: "4.0.0"))
     ],
     targets: [
         .target(
             name: "ChromeCastCore",
             dependencies: ["SwiftProtobuf", "CASTV2PlatformReader"],
-            path: "ChromeCastCore",
+            path: "./Source/Supporting Files/ChromeCastCore",
             exclude: ["PlatformReader.swift"]
         ),
-        .target(name: "CASTV2PlatformReader", path: "CASTV2PlatformReader")
+        .target(name: "CASTV2PlatformReader", path: "./Source/Helpers/CASTV2PlatformReader")
     ],
     swiftLanguageVersions: [.v4]
 )
