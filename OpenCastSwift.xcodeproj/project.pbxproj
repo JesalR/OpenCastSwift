@@ -78,6 +78,7 @@
 		0298FB952009955600A0B016 /* CastV2PlatformReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028733A7200932B90015266E /* CastV2PlatformReader.swift */; };
 		0298FB962009955600A0B016 /* CastV2PlatformReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 028733A7200932B90015266E /* CastV2PlatformReader.swift */; };
 		02F6F1EC2010059200CF01E1 /* RequestSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02F6F1EB2010059200CF01E1 /* RequestSink.swift */; };
+		CC3EB22D2427CA3700C04613 /* Package.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC3EB22C2427CA3700C04613 /* Package.swift */; };
 		DB61BEF12246037E00073F21 /* YoutubeChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB61BEF02246037E00073F21 /* YoutubeChannel.swift */; };
 		DB61BEF2224614C300073F21 /* YoutubeChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB61BEF02246037E00073F21 /* YoutubeChannel.swift */; };
 		DB61BEF3224614C400073F21 /* YoutubeChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB61BEF02246037E00073F21 /* YoutubeChannel.swift */; };
@@ -118,6 +119,7 @@
 		0289007C200551B80024D80F /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = Carthage/Build/Mac/SwiftyJSON.framework; sourceTree = "<group>"; };
 		0298FB9B2009ACA600A0B016 /* cast_channel.proto */ = {isa = PBXFileReference; lastKnownFileType = text; path = cast_channel.proto; sourceTree = "<group>"; };
 		02F6F1EB2010059200CF01E1 /* RequestSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestSink.swift; sourceTree = "<group>"; };
+		CC3EB22C2427CA3700C04613 /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package.swift; sourceTree = "<group>"; };
 		DB61BEF02246037E00073F21 /* YoutubeChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YoutubeChannel.swift; sourceTree = "<group>"; };
 		DD15225C1DBACFE4004B5762 /* CASTV2Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CASTV2Protocol.swift; sourceTree = "<group>"; };
 		DD15225E1DBAD013004B5762 /* CastStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastStatus.swift; sourceTree = "<group>"; };
@@ -254,6 +256,7 @@
 		DD674A2E1DB7E83400E1FC24 = {
 			isa = PBXGroup;
 			children = (
+				CC3EB22C2427CA3700C04613 /* Package.swift */,
 				DDC239581DB8F73A00066B2F /* Frameworks */,
 				DD674A391DB7E83500E1FC24 /* Products */,
 				DD674A431DB7E85B00E1FC24 /* Source */,
@@ -547,6 +550,7 @@
 				DDC239481DB83E0200066B2F /* CastClient.swift in Sources */,
 				DD15225D1DBACFE4004B5762 /* CASTV2Protocol.swift in Sources */,
 				0252C2B420113526002AE6A2 /* MultizoneControlChannel.swift in Sources */,
+				CC3EB22D2427CA3700C04613 /* Package.swift in Sources */,
 				024CB2ED2005A43D00FF73EE /* AppAvailability.swift in Sources */,
 				027E35BE200E8A1400A863E6 /* HeartbeatChannel.swift in Sources */,
 				DD1522681DBAD9B9004B5762 /* CastMedia.swift in Sources */,
