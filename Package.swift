@@ -11,8 +11,8 @@ let package = Package(
         .library(name: "OpenCastSwift", targets: ["OpenCastSwift", "CASTV2PlatformReader"])
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-protobuf.git", .upToNextMajor(from: "1.7.0"))
-        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", .from: "5.0.0")
+        .package(url: "https://github.com/apple/swift-protobuf.git", .upToNextMajor(from: "1.7.0")),
+        .package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", .upToNextMajor(from: "5.0.0"))
     ],
     targets: [
         .target(
