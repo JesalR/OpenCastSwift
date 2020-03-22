@@ -8,7 +8,7 @@ let package = Package(
         .macOS(.v10_12),
     ],
     products: [
-        .library(name: "OpenCastSwift", targets: ["OpenCastSwift", "CASTV2PlatformReader"])
+        .library(name: "OpenCastSwift", targets: ["ChromeCastCore", "CASTV2PlatformReader"])
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-protobuf.git", .upToNextMajor(from: "1.7.0")),
@@ -16,9 +16,9 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "OpenCastSwift",
+            name: "ChromeCastCore",
             dependencies: ["SwiftProtobuf", "CASTV2PlatformReader"],
-            path: "OpenCastSwift",
+            path: "ChromeCastCore",
             exclude: ["PlatformReader.swift"]
         ),
         .target(name: "CASTV2PlatformReader", path: "CASTV2PlatformReader")
