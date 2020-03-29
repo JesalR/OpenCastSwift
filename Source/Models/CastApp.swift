@@ -15,7 +15,7 @@ public struct CastAppIdentifier {
   public static let googleAssistant = "97216CB6"
 }
 
-public final class CastApp: NSObject {
+public final class CastApp: NSObject, Codable {
   public var id: String = ""
   public var displayName: String = ""
   public var isIdleScreen: Bool = false
