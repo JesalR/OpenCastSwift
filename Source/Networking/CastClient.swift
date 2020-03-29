@@ -399,6 +399,10 @@ public final class CastClient: NSObject, RequestDispatchable {
   }
   
   public func join(app: CastApp? = nil, completion: @escaping (Result<CastApp, CastError>) -> Void) {
+    self.join(app: app, sessionId: nil, completion: completion)
+  }
+    
+  public func join(app: CastApp? = nil, sessionId: String?, completion: @escaping (Result<CastApp, CastError>) -> Void) {
     guard outputStream != nil,
       let target = app ?? currentStatus?.apps.first else {
       completion(.failure(CastError.session("No Apps Running")))
@@ -408,6 +412,10 @@ public final class CastClient: NSObject, RequestDispatchable {
     if target == connectedApp {
       completion(.success(target))
     } else if let existing = currentStatus?.apps.first(where: { $0.id == target.id }) {
+      guard sessionId == nil || existing.sessionId == sessionId else {
+        completion(.failure(CastError.launch("App instance is not on the same session")))
+        return
+      }
       connect(to: existing)
       completion(.success(existing))
     } else {
@@ -416,6 +424,11 @@ public final class CastClient: NSObject, RequestDispatchable {
         case .success(let status):
           guard let app = status.apps.first else {
             completion(.failure(CastError.launch("Unable to get launched app instance")))
+            return
+          }
+          
+          guard sessionId == nil || app.sessionId == sessionId else {
+            completion(.failure(CastError.launch("App instance is not on the same session")))
             return
           }
           
