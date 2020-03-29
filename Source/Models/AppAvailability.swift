@@ -7,6 +7,7 @@
 //
 
 import SwiftyJSON
+import Foundation
 
 public class AppAvailability: NSObject {
   public var availability = [String: Bool]()
