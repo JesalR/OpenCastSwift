@@ -726,6 +726,7 @@ extension CastClient: StreamDelegate {
       }
     case Stream.Event.endEncountered:
       NSLog("Input stream ended")
+      disconnect()
       reconnect()
   
     default: break
