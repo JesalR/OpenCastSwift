@@ -187,66 +187,7 @@ public final class CastClient: NSObject, RequestDispatchable {
       }
     }
   }
-    
-    private func reconnect() {
-      socketQueue.async {
-        do {
-            self.closeStreams()
-          var readStream: Unmanaged<CFReadStream>?
-          var writeStream: Unmanaged<CFWriteStream>?
-          
-          let settings: [String: Any] = [
-            kCFStreamSSLValidatesCertificateChain as String: false,
-            kCFStreamSSLLevel as String: kCFStreamSocketSecurityLevelTLSv1,
-            kCFStreamPropertyShouldCloseNativeSocket as String: true
-          ]
-          
-          CFStreamCreatePairWithSocketToHost(nil, self.device.hostName as CFString, UInt32(self.device.port), &readStream, &writeStream)
-          
-          guard let readStreamRetained = readStream?.takeRetainedValue() else {
-            throw CastError.connection("Unable to create input stream")
-          }
-          
-          guard let writeStreamRetained = writeStream?.takeRetainedValue() else {
-            throw CastError.connection("Unable to create output stream")
-          }
-                    
-          CFReadStreamSetProperty(readStreamRetained, CFStreamPropertyKey(kCFStreamPropertySSLSettings), settings as CFTypeRef?)
-          CFWriteStreamSetProperty(writeStreamRetained, CFStreamPropertyKey(kCFStreamPropertySSLSettings), settings as CFTypeRef?)
-          
-          self.inputStream = readStreamRetained
-          self.outputStream = writeStreamRetained
-          
-          self.inputStream.delegate = self
-          
-          self.inputStream.schedule(in: .current, forMode: RunLoopMode.defaultRunLoopMode)
-          self.outputStream.schedule(in: .current, forMode: RunLoopMode.defaultRunLoopMode)
-          
-          self.inputStream.open()
-          self.outputStream.open()
-          
-          RunLoop.current.run()
-        } catch {
-            NSLog("Failed to reconnect: \(error)")
-            self.disconnect()
-        }
-      }
-    }
   
-    private func closeStreams() {
-        if self.inputStream != nil {
-          self.inputStream.close()
-          self.inputStream.remove(from: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-          self.inputStream = nil
-        }
-        
-        if self.outputStream != nil {
-          self.outputStream.close()
-          self.outputStream.remove(from: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
-          self.outputStream = nil
-        }
-    }
-    
   public func disconnect() {
     if isConnected {
       isConnected = false
@@ -255,7 +196,17 @@ public final class CastClient: NSObject, RequestDispatchable {
     channels.values.forEach(remove)
     
     socketQueue.async {
-        self.closeStreams()
+      if self.inputStream != nil {
+        self.inputStream.close()
+        self.inputStream.remove(from: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+        self.inputStream = nil
+      }
+      
+      if self.outputStream != nil {
+        self.outputStream.close()
+        self.outputStream.remove(from: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+        self.outputStream = nil
+      }
     }
   }
   
@@ -726,7 +677,7 @@ extension CastClient: StreamDelegate {
       }
     case Stream.Event.endEncountered:
       NSLog("Input stream ended")
-      reconnect()
+      disconnect()
   
     default: break
     }
